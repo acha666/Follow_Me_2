@@ -10,17 +10,25 @@
 #include "esp_freertos_hooks.h"
 #include "esp_heap_caps.h"
 #include "driver/spi_master.h"
+#include "driver/i2c.h"
 #include "led_strip.h"
 
-#define TFT_I2C_POWER_GPIO_PIN GPIO_NUM_21
-#define WS2812_POWER_GPIO_PIN GPIO_NUM_34
-#define WS2812_GPIO_PIN GPIO_NUM_33
+constexpr gpio_num_t TFT_I2C_POWER_GPIO_PIN = GPIO_NUM_21;
+constexpr gpio_num_t WS2812_POWER_GPIO_PIN = GPIO_NUM_34;
+constexpr gpio_num_t WS2812_GPIO_PIN = GPIO_NUM_33;
+
+constexpr i2c_port_t I2C_PORT = I2C_NUM_0;
+constexpr uint8_t I2C_SCL_PIN = 41;
+constexpr uint8_t I2C_SDA_PIN = 42;
+constexpr uint32_t I2C_MASTER_FREQ = 100000;
 
 extern SemaphoreHandle_t xGuiSemaphore;
 extern led_strip_handle_t led_strip;
 
 void vTaskLEDInit(void *arg);
-void vTaskGUI(void *arg);
 void vTaskLEDBlink(void *arg);
+void vTaskGUI(void *arg);
+void vTaskI2C(void *arg);
+void vTaskWifiScan(void *arg);
 
 #endif

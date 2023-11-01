@@ -2,6 +2,7 @@
 #include "driver/gpio.h"
 #include "lvgl.h"
 #include "lvgl_helpers.h"
+#include "ui.h"
 
 SemaphoreHandle_t xGuiSemaphore;
 void lv_tick_task(void *arg)
@@ -34,10 +35,8 @@ void vTaskGUI(void *arg)
     lv_disp_drv_register(&disp_drv);       /*Register the driver and save the created display objects*/
     esp_register_freertos_tick_hook(reinterpret_cast<esp_freertos_tick_cb_t>(lv_tick_task));
 
-    auto scr = lv_disp_get_scr_act(NULL);
-    auto label = lv_label_create(scr);
-    lv_label_set_text(label, "Hello");
-    lv_obj_align(label, LV_ALIGN_CENTER, 0, 0);
+    ui_init();
+    lv_label_set_text(ui_status,"Disconnected");
 
     while (1)
     {
