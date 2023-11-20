@@ -11,9 +11,9 @@ extern "C" void app_main(void)
     }
     ESP_ERROR_CHECK(ret);
 
-    // xTaskCreatePinnedToCore(vTaskLEDInit,"LED Init Task",1024*3,NULL,1,NULL,0);
-    // xTaskCreatePinnedToCore(vTaskGUI, "GUI Task", 1024 * 3, NULL, 1, NULL, 0);
+    xTaskCreatePinnedToCore(vTaskLEDInit,"LED Init Task",1024*3,NULL,1,NULL,0);
+    xTaskCreatePinnedToCore(vTaskGUI, "GUI Task", 1024 * 3, NULL, 1, NULL, 0);
     // vTaskDelay(1000/portTICK_PERIOD_MS);
     // xTaskCreatePinnedToCore(vTaskI2C, "I2C Task", 1024 * 3, NULL, 1, NULL, 0);
-    xTaskCreatePinnedToCore(vTaskWifiScan, "WiFi Scan Task", 1024 * 3, NULL, 1, NULL, 0);
+    // xTaskCreatePinnedToCore(vTaskWifi, "WiFi Scan Task", 1024 * 3, NULL, 1, NULL, 0);
 }
